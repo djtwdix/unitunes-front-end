@@ -11,8 +11,8 @@ const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
-    alignItems: "center",
     borderRadius: "20px",
+    padding: "25px",
   },
   container: {
     height: "100vh",
@@ -33,12 +33,37 @@ export default function SignUp() {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <Form className={classes.signUpForm}> 
-      <TextInput className={classes.input} type="text" placeholder="username" required/>
-      <TextInput type="email" placeholder="email" required/>
-      <TextInput type="password" placeholder="password" required/>
-      <TextInput type="password" placeholder="verify password" required/>
-      <Button className={classes.button}>Submit</Button>
+      <Form className={classes.signUpForm}>
+        <TextInput
+          id="username"
+          className={classes.input}
+          labelText="Username"
+          type="text"
+          placeholder="username"
+          required
+        />
+        <TextInput
+          id="email"
+          labelText="Email"
+          type="email"
+          placeholder="email"
+          required
+        />
+        <TextInput
+          id="password"
+          labelText="Password"
+          type="password"
+          placeholder="password"
+          required
+        />
+        <TextInput
+          id="password-verify"
+          labelText="Confirm Password"
+          type="password"
+          placeholder="verify password"
+          required
+        />
+        <Button className={classes.button}>Submit</Button>
       </Form>
     </div>
   );
