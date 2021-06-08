@@ -1,5 +1,7 @@
 import { createUseStyles } from "react-jss";
 import { TextInput, Form, Button } from "carbon-components-react";
+import { useState } from "react";
+import axios from "axios";
 
 const useStyles = createUseStyles({
   signUpForm: {
@@ -30,12 +32,28 @@ const useStyles = createUseStyles({
 });
 
 export default function SignUp() {
+  const [form, setForm] = useState({});
   const classes = useStyles();
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setForm({ ...form, name, value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios.post("http://localhost:3001/users/new", form);
+  };
   return (
     <div className={classes.container}>
-      <Form className={classes.signUpForm}>
+      <Form onSubmit={handleSubmit} className={classes.signUpForm}>
         <TextInput
+          onChange={handleChange}
           id="username"
+          name="username"
           className={classes.input}
           labelText="Username"
           type="text"
@@ -43,7 +61,9 @@ export default function SignUp() {
           required
         />
         <TextInput
+          onChange={handleChange}
           id="email"
+          name="email"
           labelText="Email"
           type="email"
           placeholder="email"
@@ -51,6 +71,7 @@ export default function SignUp() {
         />
         <TextInput
           id="password"
+          name="password"
           labelText="Password"
           type="password"
           placeholder="password"
@@ -58,6 +79,7 @@ export default function SignUp() {
         />
         <TextInput
           id="password-verify"
+          name="password-verify"
           labelText="Confirm Password"
           type="password"
           placeholder="verify password"
